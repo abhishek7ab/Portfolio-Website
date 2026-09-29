@@ -63,7 +63,7 @@ export const projects: Project[] = [
       "Location-based map coordination planned for donor-recipient matching"
     ],
     techStack: ["JavaScript", "Node.js", "PostgreSQL", "HTML", "CSS", "REST APIs"],
-    github: "https://github.com/abhishek7ab",
+    github: "https://github.com/abhishek7ab/giving-tree-project",
     liveDemo: "https://giving-tree-project.vercel.app/",
     category: ["Full Stack", "Web App", "Social Impact"],
     timeline: "2025",
@@ -89,7 +89,7 @@ export const projects: Project[] = [
       "Fast production bundling powered by Parcel"
     ],
     techStack: ["Python", "React", "Node.js", "IBM Watson", "REST APIs", "Parcel", "Java (JDK)"],
-    github: "https://github.com/abhishek7ab",
+    github: "https://github.com/abhishek7ab/Smart-Nutrition-Assistant",
     liveDemo: "",
     category: ["AI & ML", "Full Stack", "Web App"],
     timeline: "2025",
