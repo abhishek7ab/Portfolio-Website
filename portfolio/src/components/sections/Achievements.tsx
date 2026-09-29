@@ -6,12 +6,12 @@ import { achievements } from "@/data/achievements";
 import SectionHeader from "@/components/layout/SectionHeader";
 import {
   FaTrophy, FaCode, FaGithub, FaStar, FaMicrophone, FaFire, FaMedal,
-  FaHeart, FaCloud, FaServer, FaBrain, FaTasks,
+  FaHeart, FaCloud, FaServer, FaBrain, FaTasks, FaUsers, FaComments,
 } from "react-icons/fa";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; style?: React.CSSProperties, className?: string }>> = {
   FaTrophy, FaCode, FaGithub, FaStar, FaMicrophone, FaFire, FaMedal,
-  FaHeart, FaCloud, FaServer, FaBrain, FaTasks,
+  FaHeart, FaCloud, FaServer, FaBrain, FaTasks, FaUsers, FaComments,
 };
 
 import { fadeUp } from "@/lib/animations";

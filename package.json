@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run dev --prefix portfolio",
+    "web": "npm run dev --prefix portfolio",
     "build": "npm run build --prefix portfolio",
     "start": "npm run start --prefix portfolio",
     "lint": "npm run lint --prefix portfolio"

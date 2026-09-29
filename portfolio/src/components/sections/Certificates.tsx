@@ -141,10 +141,10 @@ export default function Certificates() {
                 </div>
               )}
 
-              {selectedCert.link && (
+              {(selectedCert.link || selectedCert.verifyUrl) && (
                 <div className="pt-5 border-t border-[var(--border)]">
                   <a
-                    href={selectedCert.link}
+                    href={selectedCert.link || selectedCert.verifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[var(--accent)] text-white font-semibold text-sm hover:opacity-90 transition-opacity shadow-lg shadow-[rgba(var(--accent-rgb),0.25)]"
