@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { personal } from '@/data/personal';
+import { AnimatePresence, motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 export default function Navbar() {
@@ -41,50 +40,53 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection, navLinks]);
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   return (
-    <header 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'py-3 bg-[var(--bg-card)]/80 backdrop-blur-md border-b border-[var(--border)] shadow-sm' 
-          : 'py-5 bg-transparent'
+    <header
+      className={`fixed top-0 w-full z-50 transition-all ${
+        isScrolled
+          ? 'py-4 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#2a2a2a]'
+          : 'py-6 bg-transparent'
       }`}
     >
-      <div className="container-custom flex items-center justify-between">
-        <a href="#hero" className="text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
-          <span className="text-[var(--accent)]">LOGO</span>
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
+        <a
+          href="#hero"
+          className="text-2xl md:text-3xl font-bold text-[#FF6B00] hover:opacity-80 transition-opacity"
+        >
+          LOGO
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-10">
           {navLinks.map((link) => (
-            <motion.a 
-              key={link.label} 
+            <a
+              key={link.label}
               href={link.href}
-              whileHover={{ y: -2 }}
-              className={`text-sm font-medium transition-colors relative group ${activeSection === link.href.substring(1) ? "text-[var(--accent)]" : "text-[var(--text-2)] hover:text-[var(--text)]"}`}
+              className={`text-sm font-medium transition-colors ${
+                activeSection === link.href.substring(1)
+                  ? "text-[#FF6B00]"
+                  : "text-[#cccccc] hover:text-white"
+              }`}
             >
               {link.label}
-              <span className={`absolute -bottom-1 left-0 h-0.5 bg-[var(--accent)] transition-all rounded-full ${activeSection === link.href.substring(1) ? "w-full" : "w-0 group-hover:w-full"}`}></span>
-            </motion.a>
+            </a>
           ))}
-          
-          <motion.a
+
+          <a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-2.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:shadow-lg hover:shadow-[var(--accent)]/30 transition-all"
+            className="px-7 py-2.5 rounded-lg bg-[#FF6B00] text-white font-semibold text-sm hover:bg-[#FF8533] transition-colors"
           >
             Hire Me
-          </motion.a>
+          </a>
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-[var(--text)] p-2 -mr-2"
+        <button
+          className="lg:hidden text-white p-2 hover:text-[#FF6B00] transition-colors"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -99,24 +101,24 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[var(--bg-card)] border-b border-[var(--border)] overflow-hidden"
+            className="lg:hidden bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#2a2a2a] overflow-hidden"
           >
-            <div className="container-custom py-4 flex flex-col gap-4">
+            <div className="container mx-auto px-6 py-6 flex flex-col gap-5">
               {navLinks.map((link) => (
-                <a 
-                  key={link.label} 
+                <a
+                  key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-base font-medium text-[var(--text-2)] hover:text-[var(--accent)] transition-colors px-2 py-1"
+                  className="text-base font-medium text-[#cccccc] hover:text-[#FF6B00] transition-colors px-2 py-1"
                 >
                   {link.label}
                 </a>
               ))}
-              
+
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-2 text-center py-3 rounded-lg bg-[var(--accent)] text-white font-semibold shadow-md"
+                className="mt-2 text-center py-3 rounded-lg bg-[#FF6B00] text-white font-semibold"
               >
                 Hire Me
               </a>

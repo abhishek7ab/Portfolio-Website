@@ -4,18 +4,23 @@
 
 /* ─── Force Dark Mode — Premium Aesthetic ─── */
 :root, .dark, .light {
-  --bg: #1a1a1a;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-muted: rgba(255, 255, 255, 0.05);
-  --text: #f5f5f5;
-  --text-2: #a0a0a0;
-  --text-3: #666666;
-  --border: rgba(255, 255, 255, 0.1);
+  --bg: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-card: #1f1f1f;
+  --bg-muted: #2a2a2a;
+  --text: #ffffff;
+  --text-2: #cccccc;
+  --text-3: #888888;
+  --text-4: #666666;
+  --border: #2a2a2a;
+  --border-light: #3a3a3a;
   --accent: #FF6B00;
   --accent-2: #FF8533;
-  --tag-bg: rgba(255, 107, 0, 0.12);
+  --accent-light: #FFB366;
+  --tag-bg: rgba(255, 107, 0, 0.1);
   --tag-text: #FF8533;
-  --glow: rgba(255, 107, 0, 0.4);
+  --glow: rgba(255, 107, 0, 0.3);
+  --shadow: rgba(0, 0, 0, 0.5);
 }
 
 /* ─── Animated Background ─── */
@@ -26,41 +31,6 @@
   background: var(--bg);
   overflow: hidden;
   pointer-events: none;
-}
-
-.animated-bg::before,
-.animated-bg::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
-  pointer-events: none;
-  animation: blob-move 20s ease-in-out infinite alternate;
-}
-
-.animated-bg::before {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, #FF6B00, #FF8533);
-  top: -200px;
-  left: -100px;
-}
-
-.animated-bg::after {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, #FF6B00, #FF8533);
-  bottom: -200px;
-  right: -100px;
-  animation-delay: -10s;
-}
-
-@keyframes blob-move {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(100px, -50px) scale(1.1); }
-  66% { transform: translate(-50px, 80px) scale(0.9); }
-  100% { transform: translate(60px, 20px) scale(1.05); }
 }
 
 /* Grain texture overlay for depth */
@@ -91,24 +61,26 @@ html {
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 15px;
-  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Plus Jakarta Sans", "Inter", sans-serif;
+  font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   text-wrap: balance;
+  color: var(--text);
 }
 
 code, pre, .mono {
@@ -116,12 +88,21 @@ code, pre, .mono {
 }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
-::selection { background: var(--accent); color: white; }
+::selection {
+  background: var(--accent);
+  color: white;
+}
 
 /* ─── Layout ─── */
 .container-custom {
@@ -145,14 +126,13 @@ code, pre, .mono {
 /* ─── Card — Glowing Glass ─── */
 .card {
   position: relative;
-  background: var(--bg-card);
+  background: #1f1f1f;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
+  border: 1px solid #2a2a2a;
   border-radius: 20px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   overflow: hidden;
-  /* Force GPU compositing so translateY never causes layout reflow */
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
@@ -177,8 +157,9 @@ code, pre, .mono {
 }
 
 .card:hover {
-  box-shadow: 0 20px 60px -15px var(--glow);
-  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 20px 60px -15px rgba(255, 107, 0, 0.3);
+  border-color: #3a3a3a;
+  transform: translateY(-2px);
 }
 
 .card:hover::before {
@@ -209,35 +190,35 @@ code, pre, .mono {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #FF6B00, #FF8533);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.3s ease;
   font-family: "Inter", sans-serif;
-  box-shadow: 0 4px 20px -5px var(--glow);
+  box-shadow: 0 8px 25px -8px rgba(255, 107, 0, 0.4);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px -5px var(--glow);
+  box-shadow: 0 12px 35px -8px rgba(255, 107, 0, 0.5);
 }
 
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
+  padding: 14px 32px;
   background: transparent;
-  color: var(--text);
-  border: 1.5px solid var(--border);
+  color: white;
+  border: 2px solid #3a3a3a;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
@@ -246,9 +227,9 @@ code, pre, .mono {
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(99, 102, 241, 0.05);
+  border-color: #FF6B00;
+  color: #FF6B00;
+  background: rgba(255, 107, 0, 0.05);
   transform: translateY(-2px);
 }
 

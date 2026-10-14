@@ -6,127 +6,114 @@ import {
   FaLinkedin,
   FaDribbble,
   FaBehance,
-  FaGithub,
 } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
 import { personal } from "@/data/personal";
-import MagneticButton from "@/components/ui/MagneticButton";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const socialLinks = [
   { href: personal.social.instagram, icon: FaInstagram, label: "Instagram" },
   { href: personal.social.linkedin, icon: FaLinkedin, label: "LinkedIn" },
-  { href: personal.social.github, icon: FaDribbble, label: "Dribbble" },
-  { href: personal.social.leetcode, icon: FaBehance, label: "Behance" },
+  { href: "https://dribbble.com", icon: FaDribbble, label: "Dribbble" },
+  { href: "https://behance.net", icon: FaBehance, label: "Behance" },
 ];
 
 export default function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-20 pb-10 relative z-10">
-      <div className="container-custom w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="hero" className="relative min-h-screen flex items-center py-20 bg-[#1a1a1a]">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* Left Side - Content */}
+          {/* Left Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-left space-y-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="space-y-6 text-left"
           >
-            <div className="space-y-3">
-              <p className="text-[var(--text-2)] text-base">Hi I am</p>
-              <h1 className="text-[var(--text-2)] text-3xl font-semibold">
+            {/* Greeting */}
+            <div className="space-y-2">
+              <p className="text-[#888888] text-lg">Hi I am</p>
+              <h1 className="text-[#CCCCCC] text-4xl md:text-5xl font-medium">
                 {personal.name}
               </h1>
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[var(--accent)] leading-tight">
-                {personal.role.split('&')[0].trim()}
-              </h2>
             </div>
 
+            {/* Main Title */}
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#FF6B00] leading-tight">
+              UI/UX designer
+            </h2>
+
             {/* Social Icons */}
-            <div className="flex gap-4 pt-2">
+            <div className="flex gap-3 pt-2">
               {socialLinks.map((item, idx) => (
-                <motion.a
+                <a
                   key={idx}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={item.label}
-                  whileHover={{ y: -3, scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="w-12 h-12 flex items-center justify-center rounded-full border-2 border-[var(--border)] text-[var(--text-2)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent)]/5 transition-all"
+                  className="w-11 h-11 flex items-center justify-center rounded-full bg-[#2a2a2a] text-[#999999] hover:text-[#FF6B00] hover:bg-[#333333] transition-all duration-200"
                 >
-                  <item.icon size={20} />
-                </motion.a>
+                  <item.icon size={18} />
+                </a>
               ))}
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4 pt-2">
-              <MagneticButton>
-                <motion.a
-                  href="#contact"
-                  className="px-8 py-3.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-base hover:shadow-lg hover:shadow-[var(--accent)]/40 transition-all flex items-center gap-2"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Hire Me
-                </motion.a>
-              </MagneticButton>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <a
+                href="#contact"
+                className="px-10 py-3.5 rounded-lg bg-[#FF6B00] text-white font-semibold hover:bg-[#FF8533] transition-all duration-200"
+              >
+                Hire Me
+              </a>
 
-              <MagneticButton>
-                <motion.a
-                  href={personal.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 rounded-lg border-2 border-[var(--border)] text-[var(--text)] font-semibold text-base hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  Download CV
-                </motion.a>
-              </MagneticButton>
+              <a
+                href={personal.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-10 py-3.5 rounded-lg border-2 border-[#3a3a3a] text-white font-semibold hover:border-[#FF6B00] hover:text-[#FF6B00] transition-all duration-200"
+              >
+                Download CV
+              </a>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[var(--border)] mt-8">
+            {/* Stats Section */}
+            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-[#2a2a2a]">
               <div>
-                <h3 className="text-3xl font-bold text-[var(--accent)]">5+</h3>
-                <p className="text-sm text-[var(--text-2)] mt-1">Experiences</p>
+                <h3 className="text-4xl font-bold text-[#FF6B00]">5+</h3>
+                <p className="text-sm text-[#888888] mt-1">Experiences</p>
               </div>
               <div>
-                <h3 className="text-3xl font-bold text-[var(--accent)]">20+</h3>
-                <p className="text-sm text-[var(--text-2)] mt-1">Project done</p>
+                <h3 className="text-4xl font-bold text-[#FF6B00]">20+</h3>
+                <p className="text-sm text-[#888888] mt-1">Project done</p>
               </div>
               <div>
-                <h3 className="text-3xl font-bold text-[var(--accent)]">80+</h3>
-                <p className="text-sm text-[var(--text-2)] mt-1">Happy Clients</p>
+                <h3 className="text-4xl font-bold text-[#FF6B00]">80+</h3>
+                <p className="text-sm text-[#888888] mt-1">Happy Clients</p>
               </div>
             </div>
           </motion.div>
 
           {/* Right Side - Profile Image */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-md aspect-[3/4]">
-              {/* Background glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/20 to-transparent rounded-3xl blur-3xl"></div>
-
-              {/* Image container with border */}
-              <div className="relative w-full h-full rounded-3xl border-4 border-[var(--border)] overflow-hidden bg-[var(--bg-card)]">
-                <OptimizedImage
-                  src={personal.profileImage}
-                  alt={personal.name}
-                  width={500}
-                  height={667}
-                  className="w-full h-full object-cover"
-                  priority
-                />
+            <div className="relative w-full max-w-lg">
+              <div className="relative rounded-3xl overflow-hidden border-4 border-[#2a2a2a]">
+                <div className="aspect-[3/4] bg-[#1a1a1a]">
+                  <OptimizedImage
+                    src={personal.profileImage}
+                    alt={personal.name}
+                    width={600}
+                    height={800}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </motion.div>
