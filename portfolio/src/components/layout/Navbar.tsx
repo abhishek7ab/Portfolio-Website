@@ -11,14 +11,11 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
 
   const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Activity', href: '#github' },
-    { label: 'Articles', href: '#blog' },
-    { label: 'Certificates', href: '#certificates' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '#hero' },
+    { label: 'Services', href: '#skills' },
+    { label: 'About me', href: '#about' },
+    { label: 'Portfolio', href: '#projects' },
+    { label: 'Contact me', href: '#contact' },
   ];
 
   useEffect(() => {
@@ -57,8 +54,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container-custom flex items-center justify-between">
-        <a href="#" className="text-2xl font-bold tracking-tight text-[var(--text)] hover:opacity-80 transition-opacity">
-          {personal.name.split(' ')[0]}<span className="text-[var(--accent)]">.</span>
+        <a href="#hero" className="text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
+          <span className="text-[var(--accent)]">LOGO</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -75,18 +72,14 @@ export default function Navbar() {
             </motion.a>
           ))}
           
-          {personal.resume && (
-            <motion.a 
-              href={personal.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-5 py-2 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20 font-medium text-sm hover:bg-[var(--accent)] hover:text-white transition-all shadow-[0_0_15px_rgba(var(--accent-rgb),0.1)] hover:shadow-[0_0_20px_rgba(var(--accent-rgb),0.4)]"
-            >
-              Resume
-            </motion.a>
-          )}
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-2.5 rounded-lg bg-[var(--accent)] text-white font-semibold text-sm hover:shadow-lg hover:shadow-[var(--accent)]/30 transition-all"
+          >
+            Hire Me
+          </motion.a>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -120,16 +113,13 @@ export default function Navbar() {
                 </a>
               ))}
               
-              {personal.resume && (
-                <a 
-                  href={personal.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 text-center py-3 rounded-lg bg-[var(--accent)] text-white font-medium shadow-md"
-                >
-                  View Resume
-                </a>
-              )}
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="mt-2 text-center py-3 rounded-lg bg-[var(--accent)] text-white font-semibold shadow-md"
+              >
+                Hire Me
+              </a>
             </div>
           </motion.div>
         )}
