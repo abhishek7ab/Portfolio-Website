@@ -45,7 +45,7 @@ export default function OptimizedImage({
           height={height}
           priority={priority}
           loading={priority ? "eager" : "lazy"}
-          onLoadingComplete={() => setIsLoading(false)}
+          onLoad={() => setIsLoading(false)}
           onError={() => setHasError(true)}
           style={{
             objectFit,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
@@ -87,7 +88,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href="https://abhishekbadave.dev" />
         <JsonLd />
-        <script
+        <Script
+          id="unregister-sw"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {

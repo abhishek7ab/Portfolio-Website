@@ -55,6 +55,7 @@ export default function Navbar() {
       <div className="container mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
         <a
           href="#hero"
+          suppressHydrationWarning
           className="text-2xl md:text-3xl font-bold text-[#FF6B00] hover:opacity-80 transition-opacity"
         >
           Abhishek
