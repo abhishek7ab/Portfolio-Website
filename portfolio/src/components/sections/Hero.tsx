@@ -13,9 +13,9 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 const socialLinks = [
   { href: personal.social.instagram, icon: FaInstagram, label: "Instagram" },
   { href: personal.social.linkedin, icon: FaLinkedin, label: "LinkedIn" },
-  { href: "https://dribbble.com", icon: FaDribbble, label: "Dribbble" },
-  { href: "https://behance.net", icon: FaBehance, label: "Behance" },
-];
+  ...(personal.social.dribbble ? [{ href: personal.social.dribbble, icon: FaDribbble, label: "Dribbble" }] : []),
+  ...(personal.social.behance ? [{ href: personal.social.behance, icon: FaBehance, label: "Behance" }] : []),
+].filter(link => link.href);
 
 export default function Hero() {
   return (

@@ -29,6 +29,8 @@ export const personal: {
     twitter: string;
     instagram: string;
     leetcode: string;
+    dribbble?: string;
+    behance?: string;
   };
   resume: string;
   profileImage: string;
@@ -91,6 +93,8 @@ Passionate about Software Development, Python/AI-ML Engineering, and building re
     twitter: "https://twitter.com/abhishekbadave",
     instagram: "https://instagram.com/abhishekbadave",
     leetcode: "https://leetcode.com/u/Abhishek2506_/",
+    dribbble: "",
+    behance: "",
   },
 
   resume: "/resume.pdf",

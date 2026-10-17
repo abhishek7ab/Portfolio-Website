@@ -57,7 +57,7 @@ export default function Navbar() {
           href="#hero"
           className="text-2xl md:text-3xl font-bold text-[#FF6B00] hover:opacity-80 transition-opacity"
         >
-          LOGO
+          Abhishek
         </a>
 
         {/* Desktop Navigation */}

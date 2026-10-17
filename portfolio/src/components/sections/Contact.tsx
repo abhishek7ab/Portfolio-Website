@@ -16,6 +16,7 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   subject: z.string().min(5, "Subject must be at least 5 characters").max(100, "Subject must be less than 100 characters").optional().or(z.literal("")),
   message: z.string().min(10, "Message must be at least 10 characters").max(5000, "Message must be less than 5000 characters"),
+  honeypot: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -48,6 +49,12 @@ export default function Contact() {
   });
 
   const onSubmit = async (data: FormValues) => {
+    // Honeypot check - if filled, it's a bot
+    if (data.honeypot) {
+      toast.error("Spam detected. Please try again.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
@@ -197,6 +204,15 @@ export default function Contact() {
               </p>
               
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 mb-6">
+                {/* Honeypot field - hidden from humans, visible to bots */}
+                <input
+                  type="text"
+                  {...register("honeypot")}
+                  className="absolute left-[-9999px]"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <input

@@ -1,9 +1,52 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+// Rate limiting store (in-memory, resets on server restart)
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
+// Clean up old entries every hour
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitMap.entries()) {
+    if (now > value.resetTime) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, 60 * 60 * 1000);
+
 export async function POST(req: Request) {
   try {
-    const { name, email, subject, message } = await req.json();
+    const { name, email, subject, message, honeypot } = await req.json();
+
+    // Honeypot check - if filled, it's spam
+    if (honeypot) {
+      return NextResponse.json(
+        { error: 'Invalid submission' },
+        { status: 400 }
+      );
+    }
+
+    // Rate limiting: max 3 submissions per IP per 15 minutes
+    const forwarded = req.headers.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
+    const now = Date.now();
+    const rateLimit = rateLimitMap.get(ip);
+
+    if (rateLimit) {
+      if (now < rateLimit.resetTime) {
+        if (rateLimit.count >= 3) {
+          return NextResponse.json(
+            { error: 'Too many requests. Please try again later.' },
+            { status: 429 }
+          );
+        }
+        rateLimit.count++;
+      } else {
+        rateLimitMap.set(ip, { count: 1, resetTime: now + 15 * 60 * 1000 });
+      }
+    } else {
+      rateLimitMap.set(ip, { count: 1, resetTime: now + 15 * 60 * 1000 });
+    }
 
     if (!name || !email || !message) {
       return NextResponse.json(
